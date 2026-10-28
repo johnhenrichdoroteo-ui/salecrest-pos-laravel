@@ -20,8 +20,8 @@
             <h2>Start clear. Keep building.</h2>
         </div>
         <div class="about-prose">
-            <p>Salecrest is a learning project for a retail POS. This Laravel version introduces the core pages and shows customer and staff information using sample records stored in controllers.</p>
-            <p>It gives the project a readable structure: routes choose the page, controllers prepare the data, and Blade views display it. Later features can grow from this foundation.</p>
+            <p>Salecrest is a learning project for a retail POS. Customer and staff records now live in a database, so the account pages show the current saved information rather than lists written into the controllers.</p>
+            <p>Laravel migrations define the tables, seeders add example accounts, and Eloquent models retrieve them. Routes still choose the page, controllers prepare the records, and Blade views display them.</p>
         </div>
     </section>
 @endsection

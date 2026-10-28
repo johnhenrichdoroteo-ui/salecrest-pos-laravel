@@ -10,7 +10,7 @@
                 <h1>User accounts</h1>
                 <p class="directory-intro">A view of staff roles and account status. The entries below are sample data for this activity.</p>
             </div>
-            <span class="record-count">{{ count($users) }} sample records</span>
+            <span class="record-count">{{ $users->count() }} sample records</span>
         </div>
 
         <div class="table-frame">
@@ -28,11 +28,11 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td><span class="record-name">{{ $user['full_name'] }}</span><span class="record-id">U-{{ str_pad((string) $user['id'], 3, '0', STR_PAD_LEFT) }}</span></td>
-                                <td class="username">{{ $user['username'] }}</td>
-                                <td>{{ $user['email'] }}</td>
-                                <td>{{ $user['role'] }}</td>
-                                <td><span class="status @if ($user['account_status'] === 'Inactive') status-inactive @endif">{{ $user['account_status'] }}</span></td>
+                                <td><span class="record-name">{{ $user->full_name }}</span><span class="record-id">U-{{ str_pad((string) $user->id, 3, '0', STR_PAD_LEFT) }}</span></td>
+                                <td class="username">{{ $user->username }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->role }}</td>
+                                <td><span class="status @if ($user->account_status === 'Inactive') status-inactive @endif">{{ $user->account_status }}</span></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -40,6 +40,6 @@
             </div>
         </div>
         <p class="table-swipe">Swipe sideways to view all columns.</p>
-        <p class="table-note">These accounts are displayed from a static array in the UserController.</p>
+        <p class="table-note">Staff accounts are loaded from the database through the User model.</p>
     </section>
 @endsection

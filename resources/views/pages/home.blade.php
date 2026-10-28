@@ -20,7 +20,7 @@
     <section class="section shell">
         <div class="section-heading">
             <h2>Good records make daily work easier.</h2>
-            <p>Start with customer details and staff roles in one familiar place. These pages show sample records for the Laravel foundation.</p>
+            <p>Start with customer details and staff roles in one familiar place. These pages now read their records from the Salecrest database.</p>
         </div>
 
         <div class="page-links">

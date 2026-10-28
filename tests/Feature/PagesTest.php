@@ -2,10 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Models\Customer;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Tests\TestCase;
 
 class PagesTest extends TestCase
 {
+    use LazilyRefreshDatabase;
+
     public function test_home_page_links_to_the_other_pages(): void
     {
         $response = $this->get('/');
@@ -31,22 +37,34 @@ class PagesTest extends TestCase
 
     public function test_customers_page_displays_sample_accounts(): void
     {
+        Customer::factory()->create([
+            'full_name' => 'Mika Santos',
+            'email' => 'mika.santos@example.com',
+        ]);
+
         $response = $this->get('/customers');
 
         $response->assertOk()
             ->assertViewIs('pages.customers')
-            ->assertViewHas('customers', fn (array $customers): bool => count($customers) >= 5)
+            ->assertViewHas('customers', fn ($customers): bool => $customers instanceof EloquentCollection && $customers->count() === 1 && $customers->first() instanceof Customer)
             ->assertSee('Mika Santos')
             ->assertSee('mika.santos@example.com');
     }
 
     public function test_users_page_displays_sample_staff(): void
     {
+        User::factory()->create([
+            'name' => 'Ari Velasco',
+            'full_name' => 'Ari Velasco',
+            'username' => 'manager01',
+            'role' => 'Manager',
+        ]);
+
         $response = $this->get('/users');
 
         $response->assertOk()
             ->assertViewIs('pages.users')
-            ->assertViewHas('users', fn (array $users): bool => count($users) >= 5)
+            ->assertViewHas('users', fn ($users): bool => $users instanceof EloquentCollection && $users->count() === 1 && $users->first() instanceof User)
             ->assertSee('manager01')
             ->assertSee('Manager');
     }
